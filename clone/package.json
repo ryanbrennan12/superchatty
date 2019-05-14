@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "nodemon --exec babel-node server.js",
+    "json-server": "json-server --watch db.json"
   },
   "keywords": [],
   "author": "Ryan Brennan",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^2.5.0",
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
