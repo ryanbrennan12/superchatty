@@ -49,6 +49,28 @@
       "teamId": "19"
 
     }
+  ],
+  "messages": [
+    {
+      "id": "1",
+      "text": "He bro, Im a message",
+      "userId": "23",
+      "channelId": "2"
+    },
+    {
+      "id": "2",
+      "text": "Wake me up in the AM",
+      "userId": "40",
+      "channelId": "3"
+
+    },
+    {
+      "id": "3",
+      "text": "Que guapo mi amor",
+      "userId": "11",
+      "channelId": "2"
+
+    }
   ]
 }
 

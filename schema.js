@@ -42,13 +42,38 @@ const ChannelType = new GraphQLObjectType({
     team: {
       type: TeamType,
       resolve(parentValue, args) {
-        console.log('I am the parent value', parentValue)
+
         return axios.get(`http://localhost:3000/teams/${parentValue.teamId}`)
           .then(res => res.data);
       }
     }
   }
 });
+const MessageType = new GraphQLObjectType({
+  name: 'Message',
+  fields: {
+    id: { type: GraphQLString },
+    text: { type: GraphQLString },
+    user: {
+      type: UserType,
+      resolve(parentValue, args) {
+        //parent value is the node on the graph where the query is coming from
+        console.log('I am the parent value', parentValue)
+        return axios.get(`http://localhost:3000/users/${parentValue.userId}`)
+          .then(res => res.data);
+      }
+    },
+    channel: {
+      type: ChannelType,
+      resolve(parentValue, args) {
+        //parent value is the node on the graph where the query is coming from
+
+        return axios.get(`http://localhost:3000/channels/${parentValue.channelId}`)
+          .then(res => res.data);
+      }
+    },
+  }
+})
 ///these are the queries we write
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -75,6 +100,14 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {
         return axios.get(`http://localhost:3000/channels/${args.id}`)
+          .then(res => res.data);
+      }
+    },
+    message: {
+      type: MessageType,
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios.get(`http://localhost:3000/messages/${args.id}`)
           .then(res => res.data);
       }
     }
