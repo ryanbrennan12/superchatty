@@ -71,6 +71,25 @@
       "channelId": "2"
 
     }
+  ],
+  "members": [
+    {
+      "id": "1",
+      "userId": "23",
+      "teamId": "22"
+    },
+    {
+      "id": "2",
+      "userId": "40",
+      "teamId": "19"
+
+    },
+    {
+      "id": "3",
+      "userId": "11",
+      "teamId": "19"
+
+    }
   ]
 }
 

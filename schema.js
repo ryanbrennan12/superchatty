@@ -73,7 +73,31 @@ const MessageType = new GraphQLObjectType({
       }
     },
   }
-})
+});
+
+const MemberType = new GraphQLObjectType({
+  name: 'Member',
+  fields: {
+    id: { type: GraphQLString },
+    team: {
+      type: TeamType,
+      resolve(parentValue, args) {
+        console.log('hola at you boi in MemberType', parentValue)
+        return axios.get(`http://localhost:3000/teams/${parentValue.teamId}`)
+          .then(res => res.data);
+      }
+    },
+    user: {
+      type: UserType,
+      resolve(parentValue, args) {
+        //parent value is the node on the graph where the query is coming from
+        console.log('hola at you boi in MemberType', parentValue)
+        return axios.get(`http://localhost:3000/users/${parentValue.ownerId}`)
+          .then(res => res.data);
+      }
+    }
+  }
+});
 ///these are the queries we write
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -108,6 +132,14 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {
         return axios.get(`http://localhost:3000/messages/${args.id}`)
+          .then(res => res.data);
+      }
+    },
+    member: {
+      type: MemberType,
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios.get(`http://localhost:3000/members/${args.id}`)
           .then(res => res.data);
       }
     }
