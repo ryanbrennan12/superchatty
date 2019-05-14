@@ -9,8 +9,6 @@ const {
   //GraphQLSchema takes in a root query and returns a GraphQLSchema  instance
 } = graphql;
 
-
-
 const UserType = new GraphQLObjectType({
   name: 'User',
   fields: {
@@ -27,17 +25,31 @@ const TeamType = new GraphQLObjectType({
     owner: {
       type: UserType,
       resolve(parentValue, args) {
-        console.log('hett', parentValue, args)
         //parent value is the node on the graph where the query is coming from
 
         return axios.get(`http://localhost:3000/users/${parentValue.ownerId}`)
-          .then(res => res.data)
+          .then(res => res.data);
       }
     }
   }
 });
 
-
+const ChannelType = new GraphQLObjectType({
+  name: 'Channel',
+  fields: {
+    id: { type: GraphQLString },
+    name: { type: GraphQLString },
+    team: {
+      type: TeamType,
+      resolve(parentValue, args) {
+        console.log('I am the parent value', parentValue)
+        return axios.get(`http://localhost:3000/teams/${parentValue.teamId}`)
+          .then(res => res.data);
+      }
+    }
+  }
+});
+///these are the queries we write
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -55,6 +67,14 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {
         return axios.get(`http://localhost:3000/teams/${args.id}`)
+          .then(res => res.data);
+      }
+    },
+    channel: {
+      type: ChannelType,
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios.get(`http://localhost:3000/channels/${args.id}`)
           .then(res => res.data);
       }
     }
