@@ -20,14 +20,32 @@
 
   "teams": [
     {
-      "id": "1",
+      "id": "19",
       "name": "Apple",
       "ownerId": "11"
     },
     {
-      "id": "2",
+      "id": "22",
       "name": "Google",
       "ownerId": "40"
     }
+  ],
+  "channels": [
+    {
+      "id": "1",
+      "name": "ESPN",
+      "teamId": "22"
+    },
+    {
+      "id": "2",
+      "name": "FOXchat",
+      "teamId": "22"
+    },
+    {
+      "id": "3",
+      "name": "pron",
+      "teamId": "19"
+    }
   ]
 }
+
