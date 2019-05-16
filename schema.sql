@@ -4,19 +4,31 @@ CREATE DATABASE splat;
 
 USE splat;
 
-
-CREATE TABLE channels (
-  id int NOT NULL AUTO_INCREMENT,
-  name varchar(100),
-  PRIMARY KEY (id)
-) ENGINE=InnoDB;
-
 CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
   username varchar(100),
   email varchar(100),
   password varchar(100),
   PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+
+CREATE TABLE teams (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(100),
+  owner_id int NOT NULL,
+  PRIMARY KEY (id),
+  INDEX (owner_id),
+  FOREIGN KEY (owner_id) references USERS(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE channels (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(100),
+  team_id int NOT NULL,
+  PRIMARY KEY (id),
+  INDEX (team_id),
+  FOREIGN KEY (team_id) references TEAMS(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE messages (
@@ -31,15 +43,17 @@ CREATE TABLE messages (
   FOREIGN KEY (user_id) references users(id)
 )  ENGINE=InnoDB;
 
-CREATE TABLE teams (
-  id int NOT NULL AUTO_INCREMENT,
-  name varchar(100),
-  owner_id int NOT NULL,
-  PRIMARY KEY (id),
-  INDEX (owner_id),
-  FOREIGN KEY (owner_id) references USERS(id)
-) ENGINE=InnoDB;
 
 
+-- INSERT INTO channels (name)  VALUES ('Lobby');
+-- INSERT INTO channels (name)  VALUES ('Education');
+-- INSERT INTO channels (name)  VALUES ('Jobs');
 
+-- INSERT INTO users (username, email, password) VALUES ('baconlollipops', 'ryansbrennan444@gmail.com', 'Taylor12');
+-- INSERT INTO users (username, email, password) VALUES ('mishka', 'michellesuplick@gmail.com', 'Elizabthe12');
+-- INSERT INTO users (username, email, password) VALUES ('ashleybear', 'ashley@gmail.com', 'nobiggie!');
 
+-- INSERT INTO messages (text, user_id, channel_id) VALUES ('whatcha up to?', 1, 2);
+-- INSERT INTO messages (text, user_id, channel_id) VALUES ('nothing right now', 2, 2);
+-- INSERT INTO messages (text, user_id, channel_id) VALUES ('go birds?', 3, 1);
+-- INSERT INTO messages (text, user_id, channel_id) VALUES ('ok np?', 2, 3);
