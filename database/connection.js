@@ -1,19 +1,20 @@
 const { Client } = require('pg');
+const Sequelize = require('sequelize');
 require('dotenv').config;
 
 
-let client = new Client({
-  user: process.env.DBUSERNAME,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.DBPASSWORD,
-  port: process.env.DBPORT
+
+const sequelize = new Sequelize(process.env.DATABASE, process.env.DBUSERNAME, process.env.DBPASSWORD, {
+  host: 'localhost',
+  dialect: 'postgres'
 });
 
-client.connect((err) => {
-  if (err) {
-    throw `We have an error ${err}`;
-  } else {
-    console.log('Connected to DB!!')
-  }
-})
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connected to DATABASE!!');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database.  SEE ERROR:', err);
+  });
+
