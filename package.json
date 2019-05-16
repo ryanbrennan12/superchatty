@@ -22,6 +22,7 @@
     "graphql": "^0.12.3",
     "graphql-server-express": "^1.4.0",
     "graphql-tools": "^4.0.4",
-    "nodemon": "^1.19.0"
+    "nodemon": "^1.19.0",
+    "pg": "^7.11.0"
   }
 }
