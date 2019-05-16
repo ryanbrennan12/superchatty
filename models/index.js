@@ -4,18 +4,22 @@ const Sequelize = require('sequelize');
 require('dotenv').config;
 
 
-const db = {
-  user: sequalize.import('/user'),
-  channel: sequalize.import('/channel'),
-  member: sequalize.import('/member'),
-  message: sequalize.import('/message'),
-  team: sequalize.import('/team'),
-};
-
 const sequelize = new Sequelize(process.env.DATABASE, process.env.DBUSERNAME, process.env.DBPASSWORD, {
   host: 'localhost',
   dialect: 'postgres'
 });
+const db = {
+  User: sequelize.import('./user'),
+  Channel: sequelize.import('./channel'),
+  Message: sequelize.import('./message'),
+  Team: sequelize.import('./team'),
+};
+
+Object.keys(db).forEach((modelName) => {
+  if ('associate' in db[modelName]) {
+    db[modelName].associate(db)
+  }
+})
 
 sequelize
   .authenticate()
@@ -27,6 +31,9 @@ sequelize
   });
 
 db.sequelize = sequelize;
-db.Sequalize = Sequalize;
+db.Sequelize = Sequelize;
 
 model.exports = db;
+
+
+
