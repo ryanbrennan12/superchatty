@@ -43,17 +43,22 @@ CREATE TABLE messages (
   FOREIGN KEY (user_id) references users(id)
 )  ENGINE=InnoDB;
 
+INSERT INTO users (username, email, password) VALUES ('baconlollipops', 'ryansbrennan444@gmail.com', 'Taylor12');
+INSERT INTO users (username, email, password) VALUES ('mishka', 'michellesuplick@gmail.com', 'Elizabthe12');
+INSERT INTO users (username, email, password) VALUES ('ashleybear', 'ashley@gmail.com', 'nobiggie!');
+
+INSERT INTO teams (name, owner_id)  VALUES ('GoChargersGo', 3);
+INSERT INTO teams (name, owner_id)  VALUES ('GoBirds', 2);
+INSERT INTO teams (name, owner_id)  VALUES ('BearsWin', 2);
+
+INSERT INTO channels (name, team_id)  VALUES ('Channel1', 1);
+INSERT INTO channels (name, team_id)  VALUES ('Channel2', 1);
+INSERT INTO channels (name, team_id)  VALUES ('Channel3', 2);
 
 
--- INSERT INTO channels (name)  VALUES ('Lobby');
--- INSERT INTO channels (name)  VALUES ('Education');
--- INSERT INTO channels (name)  VALUES ('Jobs');
+INSERT INTO messages (text, user_id, channel_id) VALUES ('whatcha up to?', 1, 2);
+INSERT INTO messages (text, user_id, channel_id) VALUES ('nothing right now', 2, 2);
+INSERT INTO messages (text, user_id, channel_id) VALUES ('go birds?', 3, 1);
+INSERT INTO messages (text, user_id, channel_id) VALUES ('ok np?', 2, 3);
 
--- INSERT INTO users (username, email, password) VALUES ('baconlollipops', 'ryansbrennan444@gmail.com', 'Taylor12');
--- INSERT INTO users (username, email, password) VALUES ('mishka', 'michellesuplick@gmail.com', 'Elizabthe12');
--- INSERT INTO users (username, email, password) VALUES ('ashleybear', 'ashley@gmail.com', 'nobiggie!');
 
--- INSERT INTO messages (text, user_id, channel_id) VALUES ('whatcha up to?', 1, 2);
--- INSERT INTO messages (text, user_id, channel_id) VALUES ('nothing right now', 2, 2);
--- INSERT INTO messages (text, user_id, channel_id) VALUES ('go birds?', 3, 1);
--- INSERT INTO messages (text, user_id, channel_id) VALUES ('ok np?', 2, 3);

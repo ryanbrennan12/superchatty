@@ -5,33 +5,24 @@ const mysql = require('mysql');
 const knex = require('knex')({
   client: 'mysql',
   connection: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_DBNAME
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'splat'
   }
 });
 
 
-knex().then((err) =>{
-  if (err) {
-    throw err
-  } else {
-    console.log('database connected!!')
-  }
+
+
+knex.select('*').from('teams').leftJoin('users', function () {
+  this.on("users.id", "=", "teams.owner_id")
+      .where("teams.owner_id", "=", "2").then((results) => {
+        console.log
+      })
 })
+//
 
-// const con = mysql.createConnection({
 
-//     host: 'localhost',
-//     user: 'root',
-//     password: ''
-// })
-
-// con.connect((err) => {
-//   if (err) {
-//     throw err
-//   } else {
-//     console.log('connected to DB')
-//   }
-// })
+let str = `SELECT reviews.review_id, reviews.user_id, reviews.trail_id, reviews.description, reviews.rating, reviews.date, activities.body \
+FROM reviews left join activities on activities.activity_id = reviews.act_id WHERE reviews.review_id = ${reviewId}`;
